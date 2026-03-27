@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Día de Sol — Villa Venecia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--brown:#3D2314;--cream:#F5F0E1;--green:#5A7247;--gold:#C9A84C;--light:#fdf9f4}
+    body{font-family:'Inter',sans-serif;background:var(--light);color:var(--brown)}
+
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+    .hero-bg{position:absolute;inset:0;background:url('https://zopionlotqjhmixiuwoa.supabase.co/storage/v1/object/public/media-vv/dia-de-sol/noche-piscina.jpg') center/cover no-repeat;filter:brightness(.55)}
+    .hero-content{position:relative;z-index:2;padding:2rem;color:#fff}
+    .hero-logo{width:80px;margin-bottom:1.2rem;opacity:.95}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:700;line-height:1.1;letter-spacing:-1px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+    .hero p{font-size:1.15rem;font-weight:300;margin-top:1rem;opacity:.9;max-width:520px;margin-inline:auto}
+    .hero-price{display:inline-block;margin-top:2rem;background:var(--gold);color:#fff;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;padding:.6rem 2rem;border-radius:50px;letter-spacing:1px}
+    .hero-sub{font-size:.85rem;margin-top:.5rem;opacity:.75}
+    .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:#fff;opacity:.6;font-size:.8rem;animation:bounce 2s infinite}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+    /* INCLUDES */
+    .section{padding:5rem 1.5rem;max-width:1100px;margin:0 auto}
+    .section-label{font-size:.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:.5rem}
+    .section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:1rem}
+    .divider{width:60px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:2.5rem}
+
+    .includes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem}
+    .include-card{background:#fff;border-radius:16px;padding:2rem 1.2rem;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.05);transition:transform .2s}
+    .include-card:hover{transform:translateY(-4px)}
+    .include-icon{font-size:2.2rem;margin-bottom:.8rem}
+    .include-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.3rem}
+    .include-card p{font-size:.82rem;color:#888;line-height:1.5}
+
+    /* GALLERY */
+    .gallery-bg{background:var(--cream);padding:5rem 1.5rem}
+    .gallery-inner{max-width:1100px;margin:0 auto}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,220px);gap:12px;margin-top:2.5rem}
+    .gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:12px;cursor:pointer;transition:transform .3s,filter .3s}
+    .gallery-grid img:hover{transform:scale(1.02);filter:brightness(1.05)}
+    .gallery-grid img:first-child{grid-row:span 2;height:100%}
+
+    /* AMENITIES */
+    .amenities{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:2.5rem}
+    .amenity{display:flex;align-items:center;gap:.8rem;background:#fff;padding:1rem 1.2rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+    .amenity-icon{font-size:1.6rem;flex-shrink:0}
+    .amenity-text h4{font-size:.95rem;font-weight:600;color:var(--brown)}
+    .amenity-text p{font-size:.78rem;color:#888;margin-top:2px}
+
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,var(--brown) 0%,#5C3317 100%);color:#fff;text-align:center;padding:5rem 1.5rem}
+    .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:1rem}
+    .cta-section p{font-size:1rem;opacity:.8;max-width:500px;margin:0 auto 2rem}
+    .cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.9rem 2.2rem;border-radius:50px;font-weight:600;font-size:1rem;text-decoration:none;transition:transform .2s,background .2s}
+    .cta-btn:hover{background:#b8972a;transform:scale(1.04)}
+    .cta-price-box{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:1.5rem 3rem;margin-bottom:2rem}
+    .cta-price-box .price{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:var(--gold)}
+    .cta-price-box .price-label{font-size:.85rem;opacity:.7;margin-top:.2rem}
+
+    /* FOOTER */
+    footer{background:var(--brown);color:#fff;text-align:center;padding:2rem;font-size:.85rem;opacity:.9}
+    footer a{color:var(--gold);text-decoration:none}
+
+    @media(max-width:640px){
+      .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+      .gallery-grid img:first-child{grid-row:span 1}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <img src="https://i.postimg.cc/gj11HxCg/LOGO-VILLA-VENECIA-EDITABLE.png" alt="Villa Venecia" class="hero-logo"/>
+    <h1>Día de Sol<br/>en Villa Venecia</h1>
+    <p>Un día de descanso total rodeado de naturaleza, piscina tipo playa y gastronomía que enamora</p>
+    <div class="hero-price">$100.000 <span style="font-size:1.2rem;font-weight:400">/ persona</span></div>
+    <p class="hero-sub">Incluye desayuno · almuerzo · refrigerio</p>
+  </div>
+  <div class="scroll-hint">↓ Descubre más</div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section class="section">
+  <p class="section-label">Tu experiencia completa</p>
+  <h2>Todo lo que incluye</h2>
+  <div class="divider"></div>
+  <div class="includes-grid">
+    <div class="include-card">
+      <div class="include-icon">🥐</div>
+      <h3>Desayuno</h3>
+      <p>Empieza el día con energía con nuestro desayuno completo</p>
+    </div>
+    <div class="include-card">
+      <div class="include-icon">🍽️</div>
+      <h3>Almuerzo</h3>
+      <p>Sabores auténticos de nuestra cocina antioqueña</p>
+    </div>
+    <div class="include-card">
+      <div class="include-icon">🫐</div>
+      <h3>Refrigerio</h3>
+      <p>Una pausa deliciosa para recargar energías durante el día</p>
+    </div>
+    <div class="include-card">
+      <div class="include-icon">🏊</div>
+      <h3>Piscina tipo playa</h3>
+      <p>Disfruta del agua cristalina con entrada tipo playa</p>
+    </div>
+    <div class="include-card">
+      <div class="include-icon">🧖</div>
+      <h3>Turco</h3>
+      <p>Relájate en nuestro turco y desconéctate del mundo</p>
+    </div>
+    <div class="include-card">
+      <div class="include-icon">🚗</div>
+      <h3>Parqueadero</h3>
+      <p>Parqueadero privado y seguro incluido sin costo adicional</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<div class="gallery-bg">
+  <div class="gallery-inner">
+    <p class="section-label">Nuestros espacios</p>
+    <h2>Un lugar que enamora</h2>
+    <div class="divider"></div>
+    <div class="gallery-grid">
+      <img src="https://zopionlotqjhmixiuwoa.supabase.co/storage/v1/object/public/media-vv/dia-de-sol/piscina-dia.jpg" alt="Piscina día"/>
+      <img src="https://zopionlotqjhmixiuwoa.supabase.co/storage/v1/object/public/media-vv/dia-de-sol/atardecer.jpg" alt="Atardecer"/>
+      <img src="https://zopionlotqjhmixiuwoa.supabase.co/storage/v1/object/public/media-vv/dia-de-sol/noche-piscina.jpg" alt="Noche piscina"/>
+      <img src="https://zopionlotqjhmixiuwoa.supabase.co/storage/v1/object/public/media-vv/dia-de-sol/ambiente1.jpg" alt="Ambiente"/>
+      <img src="https://zopionlotqjhmixiuwoa.supabase.co/storage/v1/object/public/media-vv/dia-de-sol/ambiente2.jpg" alt="Ambiente 2"/>
+    </div>
+  </div>
+</div>
+
+<!-- AMENIDADES -->
+<section class="section">
+  <p class="section-label">Mucho más que una piscina</p>
+  <h2>Nuestras zonas y servicios</h2>
+  <div class="divider"></div>
+  <div class="amenities">
+    <div class="amenity"><span class="amenity-icon">🌴</span><div class="amenity-text"><h4>Zonas sociales</h4><p>Quioscos, hamacas y áreas de descanso al aire libre</p></div></div>
+    <div class="amenity"><span class="amenity-icon">🏊</span><div class="amenity-text"><h4>Piscina tipo playa</h4><p>Entrada progresiva, perfecta para toda la familia</p></div></div>
+    <div class="amenity"><span class="amenity-icon">🧖</span><div class="amenity-text"><h4>Turco</h4><p>Sesión de relajación incluida en tu día de sol</p></div></div>
+    <div class="amenity"><span class="amenity-icon">🚗</span><div class="amenity-text"><h4>Parqueadero privado</h4><p>Seguro, cubierto y sin costo adicional</p></div></div>
+    <div class="amenity"><span class="amenity-icon">🍹</span><div class="amenity-text"><h4>Bar & Restaurante</h4><p>Carta completa disponible toda la jornada</p></div></div>
+    <div class="amenity"><span class="amenity-icon">🌿</span><div class="amenity-text"><h4>Naturaleza y montaña</h4><p>Rodeados de verde en el corazón de Venecia</p></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="section-label" style="color:rgba(255,255,255,.6)">Reserva tu lugar</p>
+  <h2>¿Listo para descansar?</h2>
+  <div class="cta-price-box">
+    <div class="price">$100.000</div>
+    <div class="price-label">Por persona · Todo incluido</div>
+  </div>
+  <p>Desayuno · Almuerzo · Refrigerio · Piscina · Turco · Parqueadero · Zonas sociales</p>
+  <a href="https://wa.me/573215038145?text=Hola!%20Quiero%20reservar%20un%20Día%20de%20Sol%20en%20Villa%20Venecia%20🌿" class="cta-btn">
+    📲 Reservar por WhatsApp
+  </a>
+</section>
+
+<footer>
+  <p>📍 Villa Venecia · Hotel, Restaurante y Bar · Venecia, Antioquia</p>
+  <p style="margin-top:.5rem"><a href="https://wa.me/573215038145">321 503 81 45</a> · <a href="https://instagram.com/villaveneciaco">@villaveneciaco</a></p>
+</footer>
+
+</body>
+</html>
